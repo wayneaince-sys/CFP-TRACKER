@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CFP Poll: Miami vs Indiana - January 19, 2025</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+```
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        color: #fff;
+        padding: 20px;
+        min-height: 100vh;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 10px;
+        font-size: 2.5em;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .game-info {
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 1.2em;
+        opacity: 0.9;
+    }
+
+    .win-probability {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin-bottom: 40px;
+    }
+
+    .team-prob {
+        background: rgba(255, 255, 255, 0.15);
+        padding: 25px;
+        border-radius: 15px;
+        text-align: center;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .team-prob.miami {
+        border-color: #F47321;
+    }
+
+    .team-prob.indiana {
+        border-color: #990000;
+    }
+
+    .team-name {
+        font-size: 1.8em;
+        font-weight: bold;
+        margin-bottom: 15px;
+    }
+
+    .probability {
+        font-size: 3em;
+        font-weight: bold;
+        margin: 15px 0;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .miami .probability {
+        color: #F47321;
+    }
+
+    .indiana .probability {
+        color: #cc0000;
+    }
+
+    .factors {
+        font-size: 0.9em;
+        text-align: left;
+        margin-top: 15px;
+        line-height: 1.6;
+    }
+
+    .factors div {
+        margin: 5px 0;
+        padding: 5px 10px;
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 5px;
+    }
+
+    .poll-section {
+        background: rgba(255, 255, 255, 0.15);
+        padding: 30px;
+        border-radius: 15px;
+        margin-bottom: 30px;
+    }
+
+    .poll-question {
+        font-size: 1.5em;
+        margin-bottom: 25px;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    .vote-buttons {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+
+    .vote-btn {
+        padding: 20px;
+        font-size: 1.3em;
+        font-weight: bold;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        color: white;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    }
+
+    .vote-btn.miami {
+        background: linear-gradient(135deg, #F47321 0%, #c55a1a 100%);
+        border: 3px solid #F47321;
+    }
+
+    .vote-btn.indiana {
+        background: linear-gradient(135deg, #990000 0%, #660000 100%);
+        border: 3px solid #990000;
+    }
+
+    .vote-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .vote-btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    .results {
+        margin-top: 30px;
+    }
+
+    .result-item {
+        margin-bottom: 20px;
+    }
+
+    .result-label {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+        font-weight: bold;
+        font-size: 1.1em;
+    }
+
+    .bar-container {
+        width: 100%;
+        height: 40px;
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 10px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .bar {
+        height: 100%;
+        transition: width 0.5s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 1.1em;
+        color: white;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    }
+
+    .bar.miami {
+        background: linear-gradient(90deg, #F47321 0%, #ff8d4a 100%);
+    }
+
+    .bar.indiana {
+        background: linear-gradient(90deg, #990000 0%, #cc0000 100%);
+    }
+
+    .total-votes {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 1.2em;
+        opacity: 0.9;
+    }
+
+    .thank-you {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 1.1em;
+        color: #4ade80;
+        display: none;
+    }
+
+    .methodology {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 20px;
+        border-radius: 10px;
+        margin-top: 30px;
+        font-size: 0.9em;
+        opacity: 0.8;
+    }
+
+    .methodology h3 {
+        margin-bottom: 10px;
+    }
+
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 1.8em;
+        }
+
+        .win-probability,
+        .vote-buttons {
+            grid-template-columns: 1fr;
+        }
+
+        .probability {
+            font-size: 2.5em;
+        }
+    }
+</style>
+```
+
+</head>
+<body>
+    <div class="container">
+        <h1>🏈 College Football Playoff Poll</h1>
+        <div class="game-info">
+            <div>Miami Hurricanes vs Indiana Hoosiers</div>
+            <div>January 19, 2025</div>
+        </div>
+
+```
+    <div class="win-probability">
+        <div class="team-prob miami">
+            <div class="team-name">🌪️ Miami Hurricanes</div>
+            <div class="probability">58%</div>
+            <div class="factors">
+                <div><strong>Season Record:</strong> 10-2</div>
+                <div><strong>Offensive Power:</strong> 34.2 PPG (High)</div>
+                <div><strong>Key Player Health:</strong> QB Cam Ward healthy</div>
+                <div><strong>Neutral Site:</strong> No advantage</div>
+                <div><strong>Previous Playoff Experience:</strong> Moderate</div>
+            </div>
+        </div>
+
+        <div class="team-prob indiana">
+            <div class="team-name">🔴 Indiana Hoosiers</div>
+            <div class="probability">42%</div>
+            <div class="factors">
+                <div><strong>Season Record:</strong> 11-1</div>
+                <div><strong>Defensive Strength:</strong> 15.8 PPG allowed</div>
+                <div><strong>Key Injuries:</strong> Minor concerns</div>
+                <div><strong>Neutral Site:</strong> No advantage</div>
+                <div><strong>Cinderella Factor:</strong> High motivation</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="poll-section">
+        <div class="poll-question">Who do you think will win the game?</div>
+        
+        <div class="vote-buttons">
+            <button class="vote-btn miami" onclick="vote('miami')">
+                Miami Hurricanes
+            </button>
+            <button class="vote-btn indiana" onclick="vote('indiana')">
+                Indiana Hoosiers
+            </button>
+        </div>
+
+        <div class="results">
+            <div class="result-item">
+                <div class="result-label">
+                    <span>🌪️ Miami Hurricanes</span>
+                    <span id="miami-percent">0%</span>
+                </div>
+                <div class="bar-container">
+                    <div class="bar miami" id="miami-bar" style="width: 0%">
+                        <span id="miami-votes">0 votes</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="result-item">
+                <div class="result-label">
+                    <span>🔴 Indiana Hoosiers</span>
+                    <span id="indiana-percent">0%</span>
+                </div>
+                <div class="bar-container">
+                    <div class="bar indiana" id="indiana-bar" style="width: 0%">
+                        <span id="indiana-votes">0 votes</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="total-votes">
+                Total Votes: <strong id="total-votes">0</strong>
+            </div>
+
+            <div class="thank-you" id="thank-you">
+                ✅ Thank you for voting!
+            </div>
+        </div>
+    </div>
+
+    <div class="methodology">
+        <h3>Win Probability Methodology</h3>
+        <p><strong>Miami (58%):</strong> Strong offensive efficiency, elite QB play, and balanced attack. Miami's high-powered offense gives them the edge, though playing on neutral ground reduces typical home advantages.</p>
+        <p><strong>Indiana (42%):</strong> Outstanding defensive performance throughout the season and impressive record. Their underdog status and defensive prowess make them dangerous, but lack of playoff experience is a concern.</p>
+        <p><em>Note: Probabilities based on season stats, injury reports, historical playoff performance, and neutral site factors. This is a competitive matchup with both teams having legitimate paths to victory.</em></p>
+    </div>
+</div>
+
+<script>
+    // Initialize vote counts from localStorage or start fresh
+    let votes = JSON.parse(localStorage.getItem('cfp-poll-votes')) || {
+        miami: 0,
+        indiana: 0
+    };
+
+    // Check if user has already voted
+    let hasVoted = localStorage.getItem('cfp-poll-has-voted') === 'true';
+
+    // Update display on page load
+    updateDisplay();
+
+    if (hasVoted) {
+        disableVoting();
+        document.getElementById('thank-you').style.display = 'block';
+    }
+
+    function vote(team) {
+        if (hasVoted) {
+            return;
+        }
+
+        // Increment vote count
+        votes[team]++;
+
+        // Save to localStorage
+        localStorage.setItem('cfp-poll-votes', JSON.stringify(votes));
+        localStorage.setItem('cfp-poll-has-voted', 'true');
+
+        hasVoted = true;
+
+        // Update display
+        updateDisplay();
+        disableVoting();
+
+        // Show thank you message
+        document.getElementById('thank-you').style.display = 'block';
+    }
+
+    function updateDisplay() {
+        const total = votes.miami + votes.indiana;
+        
+        if (total === 0) {
+            document.getElementById('miami-bar').style.width = '0%';
+            document.getElementById('indiana-bar').style.width = '0%';
+            document.getElementById('miami-percent').textContent = '0%';
+            document.getElementById('indiana-percent').textContent = '0%';
+            document.getElementById('miami-votes').textContent = '0 votes';
+            document.getElementById('indiana-votes').textContent = '0 votes';
+            document.getElementById('total-votes').textContent = '0';
+            return;
+        }
+
+        const miamiPercent = Math.round((votes.miami / total) * 100);
+        const indianaPercent = Math.round((votes.indiana / total) * 100);
+
+        // Update bars
+        document.getElementById('miami-bar').style.width = miamiPercent + '%';
+        document.getElementById('indiana-bar').style.width = indianaPercent + '%';
+
+        // Update percentages
+        document.getElementById('miami-percent').textContent = miamiPercent + '%';
+        document.getElementById('indiana-percent').textContent = indianaPercent + '%';
+
+        // Update vote counts
+        document.getElementById('miami-votes').textContent = votes.miami + ' vote' + (votes.miami !== 1 ? 's' : '');
+        document.getElementById('indiana-votes').textContent = votes.indiana + ' vote' + (votes.indiana !== 1 ? 's' : '');
+
+        // Update total
+        document.getElementById('total-votes').textContent = total;
+    }
+
+    function disableVoting() {
+        const buttons = document.querySelectorAll('.vote-btn');
+        buttons.forEach(btn => {
+            btn.disabled = true;
+            btn.style.cursor = 'not-allowed';
+        });
+    }
+
+    // Simulate live updates (check for new votes every 3 seconds)
+    setInterval(() => {
+        // In a real implementation, this would fetch from a backend
+        // For demo purposes, we'll just refresh from localStorage
+        const currentVotes = JSON.parse(localStorage.getItem('cfp-poll-votes'));
+        if (currentVotes && (currentVotes.miami !== votes.miami || currentVotes.indiana !== votes.indiana)) {
+            votes = currentVotes;
+            updateDisplay();
+        }
+    }, 3000);
+</script>
+```
+
+</body>
+</html>
